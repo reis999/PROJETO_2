@@ -40,7 +40,7 @@ public class GestorProdMenuController {
 
     @FXML
     void profile(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("profile.fxml", "Perfil", event);
     }
 
     @FXML

@@ -30,12 +30,12 @@ public class AdminMenuController {
 
     @FXML
     void profile(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("profile.fxml", "Perfil", event);
     }
 
     @FXML
     void registerAdmin(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("registaradmin.fxml", "Registar Admin", event);
     }
 
     @FXML

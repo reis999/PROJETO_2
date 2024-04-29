@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0"
+      prefWidth="1010.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.RegisterAdminController">
+   <Text fill="WHITE" layoutX="404.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registar Admin"
+         textAlignment="CENTER">
+      <font>
+         <Font size="30.0"/>
+      </font>
+   </Text>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="50.0" layoutY="123.0" pickOnBounds="true"
+              preserveRatio="true">
+      <Image url="@../../../images/user.png"/>
+   </ImageView>
+   <TextField fx:id="nome" layoutX="108.0" layoutY="123.0" prefHeight="40.0" prefWidth="436.0"
+              promptText="Nome Completo">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="50.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/at.png"/>
+   </ImageView>
+   <TextField fx:id="email" layoutX="108.0" layoutY="190.0" prefHeight="40.0" prefWidth="272.0" promptText="Email">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="50.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/telephone.png"/>
+   </ImageView>
+   <TextField fx:id="telefone" layoutX="108.0" layoutY="256.0" prefHeight="40.0" prefWidth="272.0"
+              promptText="Telefone">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="52.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/pin.png"/>
+   </ImageView>
+   <TextField fx:id="rua" layoutX="108.0" layoutY="367.0" prefHeight="40.0" prefWidth="356.0" promptText="Rua">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Text fill="WHITE" layoutX="50.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informação Pessoal"
+         textAlignment="CENTER">
+      <font>
+         <Font size="22.0"/>
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="52.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Morada"
+         textAlignment="CENTER">
+      <font>
+         <Font size="22.0"/>
+      </font>
+   </Text>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="52.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/door.png"/>
+   </ImageView>
+   <TextField fx:id="nporta" layoutX="108.0" layoutY="427.0" prefHeight="40.0" prefWidth="107.0" promptText="Nº Porta">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="52.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/zip-code.png"/>
+   </ImageView>
+   <TextField fx:id="codpostal" layoutX="108.0" layoutY="485.0" prefHeight="40.0" prefWidth="255.0"
+              promptText="Código Postal">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Line endX="-100.0" endY="476.0" layoutX="679.0" layoutY="123.0" startX="-100.0" startY="-46.0" stroke="WHITE"/>
+   <Text fill="WHITE" layoutX="624.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dados Login"
+         textAlignment="CENTER">
+      <font>
+         <Font size="22.0"/>
+      </font>
+   </Text>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="631.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/id-card.png"/>
+   </ImageView>
+   <TextField fx:id="username" layoutX="689.0" layoutY="242.0" prefHeight="40.0" prefWidth="272.0"
+              promptText="Username">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="631.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/password.png"/>
+   </ImageView>
+   <PasswordField fx:id="pass" layoutX="689.0" layoutY="309.0" prefHeight="40.0" prefWidth="272.0"
+                  promptText="Password">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </PasswordField>
+   <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="631.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../images/approve.png"/>
+   </ImageView>
+   <PasswordField fx:id="pass2" layoutX="689.0" layoutY="375.0" onKeyTyped="#verifyPass" prefHeight="40.0"
+                  prefWidth="272.0" promptText="Confirmar Password">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </PasswordField>
+   <Text fill="WHITE" layoutX="108.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ex: 1234-567"
+         textAlignment="CENTER">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Text>
+   <Text fx:id="matchPassTxt" fill="#ff4949" layoutX="689.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="Passwords não coincidem!!" textAlignment="CENTER" visible="false">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Text>
+   <Button layoutX="721.0" layoutY="468.0" mnemonicParsing="false" onAction="#createAcc" prefHeight="35.0"
+           prefWidth="153.0" text="Criar Conta">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Button>
+   <Text fill="WHITE" layoutX="29.0" layoutY="39.0" onMouseClicked="#back" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="Voltar" textAlignment="CENTER" underline="true">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Text>
+</Pane>

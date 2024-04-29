@@ -1,19 +1,14 @@
 package estg.ipvc.projetodekstop.Controllers;
 
+import estg.ipvc.projeto.data.BLL.AdminBLL;
 import estg.ipvc.projeto.data.BLL.DBConnect;
-import estg.ipvc.projeto.data.BLL.GestorProdBLL;
-import estg.ipvc.projeto.data.BLL.GestorVendaBLL;
-import estg.ipvc.projeto.data.Entity.Codpostal;
-import estg.ipvc.projeto.data.Entity.GestorProducao;
-import estg.ipvc.projeto.data.Entity.GestorVenda;
-import estg.ipvc.projeto.data.Entity.Utilizador;
+import estg.ipvc.projeto.data.Entity.*;
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import jakarta.persistence.EntityManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -22,7 +17,7 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RegisterController implements Initializable {
+public class RegisterAdminController implements Initializable {
 
     @FXML
     private TextField codpostal;
@@ -52,14 +47,11 @@ public class RegisterController implements Initializable {
     private TextField telefone;
 
     @FXML
-    private ChoiceBox<String> userType;
-
-    @FXML
     private TextField username;
 
     @FXML
     void back(MouseEvent event) {
-        LoadFXML.getInstance().loadResource("login.fxml", "Login", event);
+        LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
     }
 
     @FXML
@@ -79,8 +71,7 @@ public class RegisterController implements Initializable {
                 telefone.getText().isEmpty() ||
                 rua.getText().isEmpty() ||
                 nporta.getText().isEmpty() ||
-                codpostal.getText().isEmpty() ||
-                userType.getValue() == null){
+                codpostal.getText().isEmpty()){
             alert("Preencha todos os campos.");
             return;
         }
@@ -99,40 +90,26 @@ public class RegisterController implements Initializable {
             return;
         }
 
-        if(userType.getValue().equals("Gestor Venda")){
-            Utilizador u = new Utilizador();
-            setUserData(u);
-            GestorVenda gv = new GestorVenda();
-            try {
-                GestorVendaBLL.create(gv, u);
-            } catch (Exception e){
-                alert("Erro ao criar conta");
-                em.close();
-                LoadFXML.getInstance().loadResource("login.fxml", "Gestão de Produção de Cereais", event);
-                return;
-            }
-        } else {
-            Utilizador u = new Utilizador();
-            setUserData(u);
-            GestorProducao gp = new GestorProducao();
-            try {
-                GestorProdBLL.create(u, gp);
-            } catch (Exception e){
-                alert("Erro ao criar conta");
-                em.close();
-                LoadFXML.getInstance().loadResource("login.fxml", "Gestão de Produção de Cereais", event);
-                return;
-            }
+        Utilizador u = new Utilizador();
+        setUserData(u);
+        Admin admin = new Admin();
+
+        try {
+            AdminBLL.create(admin, u);
+        } catch (Exception e) {
+            alert("Erro ao criar conta");
+            em.close();
+            LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
+            return;
         }
 
-        em.close();
-        LoadFXML.getInstance().loadResource("login.fxml", "Gestão de Produção de Cereais", event);
 
+        em.close();
+        LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userType.getItems().addAll("Gestor Venda", "Gestor Produção");
     }
 
     public boolean verifyPass(){

@@ -1,6 +1,5 @@
 package estg.ipvc.projetodekstop.Controllers;
 
-import estg.ipvc.projeto.data.BLL.AdminBLL;
 import estg.ipvc.projeto.data.BLL.DBConnect;
 import estg.ipvc.projeto.data.Entity.*;
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
@@ -21,32 +20,30 @@ public class LoginController implements Initializable {
 
     @FXML
     private PasswordField passwordPF;
-
     @FXML
     private TextField usernameTF;
 
+
     private final EntityManager em = DBConnect.getEntityManager();
+
+    public static GestorVenda gestorVenda;
+    public static GestorProducao gestorProducao;
+    public static Admin admin;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        gestorVenda = null;
+        gestorProducao = null;
+        admin = null;
+
         if(em == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro de ligação");
             alert.setHeaderText("Não foi possível ligar à base de dados");
             alert.showAndWait();
             System.exit(0);
-        }
-        Admin admin = new Admin();
-        if(em.createQuery("select a from Admin a", Admin.class).getResultList().isEmpty()){
-            Utilizador user = new Utilizador();
-            user.setUsername("admin");
-            user.setPassword("admin");
-            user.setNome("admin");
-            Codpostal cp = new Codpostal();
-            cp.setCodpostal("1000-001");
-            cp.setLocalidade("Lisboa");
-            user.setCodpostal(cp);
-            AdminBLL.create(admin, user);
         }
     }
 
@@ -75,9 +72,7 @@ public class LoginController implements Initializable {
 
                 if (user.getPassword().equals(password)) {
 
-                    GestorVenda gestorVenda = new GestorVenda();
-                    GestorProducao gestorProducao = new GestorProducao();
-                    Admin admin = new Admin();
+
 
                     try {
                         gestorVenda = em.createQuery("SELECT g FROM GestorVenda g WHERE g.utilizador = :User", GestorVenda.class)
@@ -85,6 +80,11 @@ public class LoginController implements Initializable {
                                 .getSingleResult();
                     } catch (NoResultException ex){
                         System.out.println("Gestor de venda não encontrado");
+                    }
+
+                    if (gestorVenda != null) {
+                        LoadFXML.getInstance().loadResource("gestorvendamenu.fxml", "Menu Gestor de Venda", event);
+                        return;
                     }
 
                     try {
@@ -95,6 +95,11 @@ public class LoginController implements Initializable {
                         System.out.println("Gestor de produção não encontrado");
                     }
 
+                    if (gestorProducao != null) {
+                        LoadFXML.getInstance().loadResource("gestorprodmenu.fxml", "Menu Gestor de Produção", event);
+                        return;
+                    }
+
                     try {
                         admin = em.createQuery("SELECT a FROM Admin a WHERE a.utilizador = :User", Admin.class)
                                 .setParameter("User", user)
@@ -103,18 +108,8 @@ public class LoginController implements Initializable {
                         System.out.println("Admin não encontrado");
                     }
 
-                    if (gestorVenda != null) {
-                        LoadFXML.getInstance().loadResource("gestorvendamenu.fxml", "Menu Gestor de Venda", event);
-                        return;
-                    }
-
-                    if (gestorProducao != null) {
-                        LoadFXML.getInstance().loadResource("gestorprodmenu.fxml", "Menu Gestor de Venda", event);
-                        return;
-                    }
-
                     if(admin != null) {
-                        LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Gestor de Venda", event);
+                        LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
                     }
 
                 } else {
