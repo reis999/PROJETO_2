@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+  <persistence-unit name="projeto">
+    <class>estg.ipvc.projeto.data.Entity.Admin</class>
+    <class>estg.ipvc.projeto.data.Entity.Cliente</class>
+    <class>estg.ipvc.projeto.data.Entity.Codpostal</class>
+    <class>estg.ipvc.projeto.data.Entity.Cultivo</class>
+    <class>estg.ipvc.projeto.data.Entity.GestorProducao</class>
+    <class>estg.ipvc.projeto.data.Entity.GestorVenda</class>
+    <class>estg.ipvc.projeto.data.Entity.LinhaVenda</class>
+    <class>estg.ipvc.projeto.data.Entity.LinhaVendaPK</class>
+    <class>estg.ipvc.projeto.data.Entity.Lote</class>
+    <class>estg.ipvc.projeto.data.Entity.LoteCultivo</class>
+    <class>estg.ipvc.projeto.data.Entity.LoteCultivoPK</class>
+    <class>estg.ipvc.projeto.data.Entity.TipoCereal</class>
+    <class>estg.ipvc.projeto.data.Entity.Transporte</class>
+    <class>estg.ipvc.projeto.data.Entity.Utilizador</class>
+    <class>estg.ipvc.projeto.data.Entity.Venda</class>
+
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/projeto1"/>
+      <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+      <property name="jakarta.persistence.jdbc.password" value="diogo"/>
+    </properties>
+  </persistence-unit>
+</persistence>

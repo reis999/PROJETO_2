@@ -1,0 +1,108 @@
+package estg.ipvc.projeto.data.Entity;
+
+import jakarta.persistence.*;
+
+import java.sql.Date;
+import java.util.Collection;
+import java.util.Objects;
+
+@Entity
+public class Venda {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id_venda", nullable = false)
+    private int idVenda;
+    @Basic
+    @Column(name = "data", nullable = false)
+    private Date data;
+    @Basic
+    @Column(name = "estado", nullable = false, length = 50)
+    private String estado;
+    @OneToMany(mappedBy = "vendaByIdVenda")
+    private Collection<LinhaVenda> linhaVendas;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+    @ManyToOne
+    @JoinColumn(name = "id_gestor_venda")
+    private GestorVenda gestorVenda;
+    @ManyToOne
+    @JoinColumn(name = "id_transporte")
+    private Transporte transporte;
+
+    public int getIdVenda() {
+        return idVenda;
+    }
+
+    public void setIdVenda(int idVenda) {
+        this.idVenda = idVenda;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Venda)) return false;
+        Venda venda = (Venda) o;
+        return idVenda == venda.idVenda &&
+                Objects.equals(data, venda.data) &&
+                Objects.equals(estado, venda.estado) &&
+                Objects.equals(linhaVendas, venda.linhaVendas) &&
+                Objects.equals(cliente, venda.cliente) &&
+                Objects.equals(gestorVenda, venda.gestorVenda) &&
+                Objects.equals(transporte, venda.transporte);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idVenda, data, estado, linhaVendas, cliente, gestorVenda, transporte);
+    }
+
+    public Collection<LinhaVenda> getLinhaVendas() {
+        return linhaVendas;
+    }
+
+    public void setLinhaVendas(Collection<LinhaVenda> linhaVendas) {
+        this.linhaVendas = linhaVendas;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public GestorVenda getGestorVenda() {
+        return gestorVenda;
+    }
+
+    public void setGestorVenda(GestorVenda gestorVenda) {
+        this.gestorVenda = gestorVenda;
+    }
+
+    public Transporte getTransporte() {
+        return transporte;
+    }
+
+
+    public void setTransporteByIdTransporte(Transporte transporte) {
+        this.transporte = transporte;
+    }
+}

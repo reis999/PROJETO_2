@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.GestorProdMenuController">
+   <VBox layoutX="404.0" prefHeight="400.0" prefWidth="196.0" style="-fx-background-color: be9b7b;">
+      <Pane>
+         <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#listBatches" prefHeight="68.0"
+                 prefWidth="196.0"
+                 style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;"
+                 text="Listar Lotes">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Button>
+         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="149.0" layoutY="18.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../../images/list.png"/>
+         </ImageView>
+      </Pane>
+      <Pane>
+         <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#registerBatch" prefHeight="68.0"
+                 prefWidth="196.0"
+                 style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;"
+                 text="Registar Lote">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Button>
+         <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="149.0" layoutY="17.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../../images/cereal.png"/>
+         </ImageView>
+      </Pane>
+      <Pane>
+         <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#manageBatches" prefHeight="68.0"
+                 prefWidth="196.0"
+                 style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;"
+                 text="Gerir Lotes">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Button>
+         <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="144.0" layoutY="12.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../../images/commodity.png"/>
+         </ImageView>
+      </Pane>
+      <Pane>
+         <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ManageCerealType" prefHeight="68.0"
+                 prefWidth="196.0"
+                 style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;"
+                 text="Gerir &#10;Tipos de Cereais">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Button>
+         <ImageView fitHeight="50.0" fitWidth="44.0" layoutX="146.0" layoutY="12.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../../images/wheat.png"/>
+         </ImageView>
+      </Pane>
+      <Pane>
+         <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#manageCultivation" prefHeight="68.0"
+                 prefWidth="196.0"
+                 style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;"
+                 text="Gerir&#10;Cultivos">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Button>
+         <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="144.0" layoutY="12.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../../images/earth.png"/>
+         </ImageView>
+      </Pane>
+      <Pane>
+         <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#profile" prefHeight="68.0"
+                 prefWidth="196.0"
+                 style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;"
+                 text="Perfil">
+            <font>
+               <Font size="18.0"/>
+            </font>
+         </Button>
+         <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="149.0" layoutY="18.0" pickOnBounds="true"
+                    preserveRatio="true">
+            <Image url="@../../../images/user_black.png"/>
+         </ImageView>
+      </Pane>
+   </VBox>
+   <Text fill="WHITE" layoutX="74.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="Menu &#10;Gestor de Produção" textAlignment="CENTER">
+      <font>
+         <Font size="30.0"/>
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="14.0" layoutY="27.0" onMouseClicked="#back" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="Sair" textAlignment="CENTER" underline="true">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Text>
+</Pane>
