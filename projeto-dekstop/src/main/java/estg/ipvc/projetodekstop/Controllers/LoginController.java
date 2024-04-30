@@ -61,8 +61,6 @@ public class LoginController implements Initializable {
             String username = usernameTF.getText();
             String password = passwordPF.getText();
 
-
-
             Utilizador user = em.createQuery("SELECT u FROM Utilizador u WHERE u.username = :username", Utilizador.class)
                     .setParameter("username", username)
                     .getSingleResult();
@@ -71,8 +69,6 @@ public class LoginController implements Initializable {
             if (user != null) {
 
                 if (user.getPassword().equals(password)) {
-
-
 
                     try {
                         gestorVenda = em.createQuery("SELECT g FROM GestorVenda g WHERE g.utilizador = :User", GestorVenda.class)
@@ -118,14 +114,13 @@ public class LoginController implements Initializable {
                     alert.setHeaderText("Password incorreta");
                     alert.showAndWait();
                 }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erro de login");
-                alert.setHeaderText("Utilizador não encontrado");
-                alert.showAndWait();
             }
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (NoResultException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro de login");
+            alert.setHeaderText("Utilizador não encontrado");
+            alert.showAndWait();
+            clear();
         }
     }
 

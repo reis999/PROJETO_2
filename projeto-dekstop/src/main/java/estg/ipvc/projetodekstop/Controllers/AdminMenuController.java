@@ -20,12 +20,12 @@ public class AdminMenuController {
 
     @FXML
     void listManagers(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("adminlistmanagers.fxml", "Lista de Gestores", event);
     }
 
     @FXML
     void manageData(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("adminmanagedata.fxml", "Gerir Dados", event);
     }
 
     @FXML
@@ -40,12 +40,12 @@ public class AdminMenuController {
 
     @FXML
     void registerUser(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("adminregisteruser.fxml", "Registar Utilizador", event);
     }
 
     @FXML
     void stats(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("adminstats.fxml", "Estatísticas", event);
     }
 
 }

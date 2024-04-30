@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="743.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.AdminRegisterUserController">
+   <Text fill="WHITE" layoutX="14.0" layoutY="40.0" onMouseClicked="#back" strokeType="OUTSIDE" strokeWidth="0.0" text="Voltar" underline="true">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="343.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Utilizadores Registados">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <TableView fx:id="userTable" layoutX="178.0" layoutY="107.0" prefHeight="309.0" prefWidth="536.0">
+      <columns>
+         <TableColumn fx:id="id" prefWidth="36.0" text="id" />
+         <TableColumn fx:id="username" prefWidth="131.0" text="username" />
+         <TableColumn fx:id="password" prefWidth="129.0" text="password" />
+         <TableColumn fx:id="nome" prefWidth="131.0" text="nome" />
+         <TableColumn fx:id="morada" prefWidth="108.0" text="morada" />
+      </columns></TableView>
+   <VBox layoutX="14.0" layoutY="180.0" prefHeight="163.0" prefWidth="136.0" style="-fx-background-color: be9b7b;">
+      <Button mnemonicParsing="false" onAction="#registerManager" prefHeight="80.0" prefWidth="145.0" style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;" text="Registar Gestor&#10;" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button mnemonicParsing="false" onAction="#registerClient" prefHeight="84.0" prefWidth="136.0" style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;" text="Registar Cliente" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </VBox>
+</Pane>

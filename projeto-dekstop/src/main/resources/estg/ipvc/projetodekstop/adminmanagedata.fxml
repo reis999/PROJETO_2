@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0"
+      prefWidth="743.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="estg.ipvc.projetodekstop.Controllers.AdminManageDataController">
+   <Text fill="WHITE" layoutX="14.0" layoutY="40.0" onMouseClicked="#back" strokeType="OUTSIDE" strokeWidth="0.0"
+         text="Voltar" underline="true">
+      <font>
+         <Font size="24.0"/>
+      </font>
+   </Text>
+   <Text fill="WHITE" layoutX="343.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dados no Sistema">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Text>
+   <TableView fx:id="loteTable" layoutX="191.0" layoutY="107.0" prefHeight="309.0" prefWidth="523.0">
+      <columns>
+         <TableColumn fx:id="idLote" prefWidth="36.0" text="id"/>
+         <TableColumn fx:id="priceLote" prefWidth="89.0" text="preco_unidade"/>
+         <TableColumn fx:id="qtdLote" prefWidth="76.0" text="quantidade"/>
+         <TableColumn fx:id="dtIniLote" prefWidth="84.0" text="data_inicio"/>
+         <TableColumn fx:id="dtRecolhaLote" prefWidth="81.0" text="data_recolha"/>
+         <TableColumn fx:id="idGestorLote" prefWidth="81.0" text="id_gestor"/>
+         <TableColumn fx:id="idTipoCLote" prefWidth="81.0" text="id_tipo_cereal"/>
+      </columns>
+   </TableView>
+   <Text fill="WHITE" layoutX="14.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabela:"
+         wrappingWidth="140.76953125">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Text>
+   <ChoiceBox fx:id="tableChoice" layoutX="14.0" layoutY="137.0" prefHeight="25.0" prefWidth="159.0"
+              style="-fx-background-color: be9b7b;"/>
+   <TableView fx:id="cultivoTable" layoutX="191.0" layoutY="107.0" prefHeight="309.0" prefWidth="523.0">
+      <columns>
+         <TableColumn fx:id="idCultivo" prefWidth="90.0" text="id"/>
+         <TableColumn fx:id="tipoCultivo" prefWidth="432.0" text="tipo_cultivo"/>
+      </columns>
+   </TableView>
+   <TableView fx:id="linhaVendaTable" layoutX="191.0" layoutY="107.0" prefHeight="309.0" prefWidth="523.0">
+      <columns>
+         <TableColumn fx:id="idLoteLinhaVenda" prefWidth="127.0" text="id_lote"/>
+         <TableColumn fx:id="idVendaLinhaVenda" prefWidth="162.0" text="id_venda"/>
+         <TableColumn fx:id="quantidadeLinhaVenda" prefWidth="233.0" text="quantidade"/>
+      </columns>
+   </TableView>
+   <TableView fx:id="tipoCerealTable" layoutX="191.0" layoutY="107.0" prefHeight="309.0" prefWidth="523.0">
+      <columns>
+         <TableColumn fx:id="idTipoCereal" prefWidth="149.0" text="id"/>
+         <TableColumn fx:id="descTipoCereal" prefWidth="373.0" text="nome "/>
+      </columns>
+   </TableView>
+   <TableView fx:id="transportTable" layoutX="191.0" layoutY="107.0" prefHeight="309.0" prefWidth="523.0">
+      <columns>
+         <TableColumn fx:id="idTransport" prefWidth="62.0" text="id"/>
+         <TableColumn fx:id="tipoTransport" prefWidth="176.0" text="tipo"/>
+         <TableColumn fx:id="custoTransport" prefWidth="111.0" text="custo"/>
+         <TableColumn fx:id="tempoTransport" prefWidth="173.0" text="tempo entrega"/>
+      </columns>
+   </TableView>
+   <TableView fx:id="vendaTable" layoutX="191.0" layoutY="107.0" prefHeight="309.0" prefWidth="523.0">
+      <columns>
+         <TableColumn fx:id="idVenda" prefWidth="62.0" text="id"/>
+         <TableColumn fx:id="dataVenda" prefWidth="91.0" text="data"/>
+         <TableColumn fx:id="estadoVenda" prefWidth="116.0" text="estado"/>
+         <TableColumn fx:id="idClienteVenda" prefWidth="67.0" text="id cliente"/>
+         <TableColumn fx:id="idGestorVenda" prefWidth="89.0" text="id gestor"/>
+         <TableColumn fx:id="idTransportVenda" prefWidth="97.0" text="id transporte"/>
+      </columns>
+   </TableView>
+   <TableView fx:id="loteCultivoTable" layoutX="191.0" layoutY="107.0" prefHeight="309.0" prefWidth="523.0">
+      <columns>
+         <TableColumn fx:id="idLoteLC" prefWidth="125.0" text="id lote"/>
+         <TableColumn fx:id="idCultivoLC" prefWidth="127.0" text="id cultivo"/>
+         <TableColumn fx:id="qtdLC" prefWidth="270.0" text="quantidade"/>
+      </columns>
+   </TableView>
+   <Button layoutX="562.0" layoutY="441.0" mnemonicParsing="false" onAction="#removeData" prefHeight="35.0"
+           prefWidth="152.0" style="-fx-background-color: be9b7b;" text="Remover Registo">
+      <font>
+         <Font size="16.0"/>
+      </font>
+   </Button>
+</Pane>

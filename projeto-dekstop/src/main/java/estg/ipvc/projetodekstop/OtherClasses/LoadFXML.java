@@ -38,7 +38,6 @@ public class LoadFXML {
                 System.err.println("FXML file not found!");
             }
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println(e.getMessage());
         }
     }
