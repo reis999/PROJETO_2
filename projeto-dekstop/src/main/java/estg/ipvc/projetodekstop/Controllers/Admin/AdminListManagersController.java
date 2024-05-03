@@ -1,15 +1,17 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.Admin;
 
 import estg.ipvc.projeto.data.BLL.DBConnect;
-import estg.ipvc.projeto.data.Entity.Codpostal;
+import estg.ipvc.projeto.data.BLL.GestorProdBLL;
 import estg.ipvc.projeto.data.Entity.GestorProducao;
 import estg.ipvc.projeto.data.Entity.GestorVenda;
 import estg.ipvc.projeto.data.Entity.Utilizador;
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import jakarta.persistence.EntityManager;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,7 +25,7 @@ import java.util.ResourceBundle;
 public class AdminListManagersController implements Initializable {
 
     @FXML
-    private TableColumn<Utilizador, Codpostal> cpostal;
+    private TableColumn<Utilizador, String> cpostal;
 
     @FXML
     private TableView<Utilizador> gestorTable;
@@ -58,7 +60,53 @@ public class AdminListManagersController implements Initializable {
 
     @FXML
     void removeData(ActionEvent event) {
+        Utilizador u = gestorTable.getSelectionModel().getSelectedItem();
+        if(u == null){
+            return;
+        }
 
+        try {
+            GestorVenda gv = em.createQuery("SELECT gv FROM GestorVenda gv WHERE gv.utilizador = :id", GestorVenda.class)
+                    .setParameter("id", u)
+                    .getSingleResult();
+            em.getTransaction().begin();
+            em.remove(gv);
+            em.getTransaction().commit();
+        }catch (Exception ignored){}
+
+        try {
+            GestorProducao gp = em.createQuery("SELECT gp FROM GestorProducao gp WHERE gp.utilizador = :id", GestorProducao.class)
+                    .setParameter("id", u)
+                    .getSingleResult();
+            GestorProdBLL.remove(gp);
+        }catch (Exception ignored){}
+
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirmação");
+        confirmation.setHeaderText("Tem a certeza que deseja remover o gestor?");
+        confirmation.showAndWait();
+        if(confirmation.getResult().getText().equals("CANCELAR")){
+            return;
+        }
+
+        try {
+            em.getTransaction().begin();
+            em.remove(u);
+            em.getTransaction().commit();
+            gestorTable.getItems().remove(u);
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Não foi possível remover o gestor");
+            alert.showAndWait();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sucesso");
+        alert.setHeaderText("Gestor removido com sucesso");
+        alert.showAndWait();
     }
 
     @Override
@@ -80,7 +128,7 @@ public class AdminListManagersController implements Initializable {
 
                     if(gv != null){
                         gestorTable.getItems().add(u);
-                        fillTable();
+                        fillTable(u);
                     }
                 }
 
@@ -98,7 +146,7 @@ public class AdminListManagersController implements Initializable {
 
                     if(gp != null){
                         gestorTable.getItems().add(u);
-                        fillTable();
+                        fillTable(u);
                     }
                 }
             }else{
@@ -124,21 +172,21 @@ public class AdminListManagersController implements Initializable {
 
                     if(gp != null || gv != null){
                         gestorTable.getItems().add(u);
-                        fillTable();
+                        fillTable(u);
                     }
                 }
             }
         });
     }
 
-    private void fillTable(){
+    private void fillTable(Utilizador u){
         id.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         rua.setCellValueFactory(new PropertyValueFactory<>("rua"));
         nporta.setCellValueFactory(new PropertyValueFactory<>("numporta"));
-        cpostal.setCellValueFactory(new PropertyValueFactory<>("codpostal"));
+        cpostal.setCellValueFactory(c -> new SimpleStringProperty(u.getCodpostal().getCodpostal()));
     }
 
 }

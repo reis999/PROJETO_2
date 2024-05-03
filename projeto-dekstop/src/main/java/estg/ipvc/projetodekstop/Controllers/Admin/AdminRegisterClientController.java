@@ -1,29 +1,19 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.Admin;
 
+import estg.ipvc.projeto.data.BLL.ClientBLL;
 import estg.ipvc.projeto.data.BLL.DBConnect;
-import estg.ipvc.projeto.data.BLL.GestorProdBLL;
-import estg.ipvc.projeto.data.BLL.GestorVendaBLL;
-import estg.ipvc.projeto.data.Entity.Codpostal;
-import estg.ipvc.projeto.data.Entity.GestorProducao;
-import estg.ipvc.projeto.data.Entity.GestorVenda;
-import estg.ipvc.projeto.data.Entity.Utilizador;
+import estg.ipvc.projeto.data.Entity.*;
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import jakarta.persistence.EntityManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class AdminRegisterManagerController implements Initializable {
+public class AdminRegisterClientController {
 
     @FXML
     private TextField codpostal;
@@ -53,10 +43,9 @@ public class AdminRegisterManagerController implements Initializable {
     private TextField telefone;
 
     @FXML
-    private ChoiceBox<String> userType;
-
-    @FXML
     private TextField username;
+
+    private final EntityManager em = DBConnect.getEntityManager();
 
     @FXML
     void back(MouseEvent event) {
@@ -65,7 +54,7 @@ public class AdminRegisterManagerController implements Initializable {
 
     @FXML
     void createAcc(ActionEvent event) {
-        EntityManager em = DBConnect.getEntityManager();
+
 
         if(!verifyPass()){
             alert("Passwords diferentes.");
@@ -74,13 +63,14 @@ public class AdminRegisterManagerController implements Initializable {
         if(username.getText().isEmpty() ||
                 pass.getText().isEmpty() ||
                 pass2.getText().isEmpty() ||
-                nome.getText().isEmpty() ||
-                userType.getValue() == null){
+                nome.getText().isEmpty()){
             alert("Preencha todos os campos obrigatórios.");
             return;
         }
 
-        if(username.getText().equals(em.createQuery("SELECT u.username FROM Utilizador u WHERE u.username = :username", String.class).setParameter("username", username.getText()).getResultList().stream().findFirst().orElse(null))){
+        if(username.getText().equals(em.createQuery("SELECT u.username FROM Utilizador u WHERE u.username = :username", String.class)
+                .setParameter("username", username.getText())
+                .getResultList().stream().findFirst().orElse(null))){
             alert("Username já existe, tente outro.");
             return;
         }
@@ -94,40 +84,25 @@ public class AdminRegisterManagerController implements Initializable {
             return;
         }
 
-        if(userType.getValue().equals("Gestor Venda")){
-            Utilizador u = new Utilizador();
-            setUserData(u);
-            GestorVenda gv = new GestorVenda();
-            try {
-                GestorVendaBLL.create(gv, u);
-            } catch (Exception e){
-                alert("Erro ao criar conta");
-                em.close();
-                LoadFXML.getInstance().loadResource("adminregisteruser.fxml", "Registar Utilizador", event);
-                return;
-            }
-        } else {
-            Utilizador u = new Utilizador();
-            setUserData(u);
-            GestorProducao gp = new GestorProducao();
-            try {
-                GestorProdBLL.create(u, gp);
-            } catch (Exception e){
-                alert("Erro ao criar conta");
-                em.close();
-                LoadFXML.getInstance().loadResource("adminregisteruser.fxml", "Registar Utilizador", event);
-                return;
-            }
+        Utilizador u = new Utilizador();
+        setUserData(u);
+        Cliente cli = new Cliente();
+        try {
+            ClientBLL.create(cli, u);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            alert("Erro ao criar conta");
+            return;
         }
 
-        em.close();
+        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+        alert2.setTitle("Sucesso");
+        alert2.setHeaderText("Conta criada com sucesso.");
+        alert2.showAndWait();
+
         LoadFXML.getInstance().loadResource("adminregisteruser.fxml", "Registar Utilizador", event);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        userType.getItems().addAll("Gestor Venda", "Gestor Produção");
-    }
 
     public boolean verifyPass(){
         matchPassTxt.setVisible(true);
@@ -137,6 +112,7 @@ public class AdminRegisterManagerController implements Initializable {
             return true;
         } else {
             matchPassTxt.setText("Passwords diferentes");
+            matchPassTxt.setStyle("-fx-fill: red");
             return false;
         }
     }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="651.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.GestorProd.GestorProdManageCerealTypeController">
+   <Text fill="WHITE" layoutX="14.0" layoutY="36.0" onMouseClicked="#back" strokeType="OUTSIDE" strokeWidth="0.0" text="Voltar" underline="true">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Text>
+   <TableView fx:id="tipoCerealTable" layoutX="216.0" layoutY="102.0" prefHeight="265.0" prefWidth="418.0">
+      <columns>
+         <TableColumn fx:id="cerealid" prefWidth="92.0" text="id" />
+         <TableColumn fx:id="cerealName" prefWidth="324.0" text="nome " />
+      </columns>
+   </TableView>
+   <Text fill="WHITE" layoutX="335.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipos de Cereais">
+      <font>
+         <Font size="25.0" />
+      </font>
+   </Text>
+   <Button fx:id="removeBtn" layoutX="543.0" layoutY="421.0" mnemonicParsing="false" onAction="#remove" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: be9b7b;" text="Remover">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Button fx:id="editBtn" layoutX="425.0" layoutY="421.0" mnemonicParsing="false" onAction="#update" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: be9b7b;" text="Editar">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Button fx:id="addBtn" layoutX="306.0" layoutY="421.0" mnemonicParsing="false" onAction="#addCerealType" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: be9b7b;" text="Adicionar">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Text fx:id="nameTxt" fill="WHITE" layoutX="14.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" wrappingWidth="78.2978515625">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Text>
+   <TextField fx:id="name" layoutX="14.0" layoutY="187.0" prefHeight="31.0" prefWidth="187.0">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </TextField>
+   <Button fx:id="cancelBtn" layoutX="543.0" layoutY="421.0" mnemonicParsing="false" onAction="#cancelUpdate" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: be9b7b;" text="Cancelar">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Button fx:id="confirmBtn" layoutX="425.0" layoutY="421.0" mnemonicParsing="false" onAction="#confirmUpdate" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: be9b7b;" text="Confirmar">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Button fx:id="addBtn2" layoutX="14.0" layoutY="234.0" mnemonicParsing="false" onAction="#persist" prefHeight="31.0" prefWidth="85.0" style="-fx-background-color: be9b7b;" text="Adicionar">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+   <Button fx:id="cancelAddBtn" layoutX="110.0" layoutY="234.0" mnemonicParsing="false" onAction="#cancelPersist" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: be9b7b;" text="Cancelar">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Button>
+</Pane>

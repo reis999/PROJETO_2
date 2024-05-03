@@ -1,9 +1,10 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.Admin;
 
 import estg.ipvc.projeto.data.BLL.DBConnect;
 import estg.ipvc.projeto.data.Entity.*;
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import jakarta.persistence.EntityManager;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -321,9 +322,20 @@ public class AdminManageDataController implements Initializable {
         idVenda.setCellValueFactory(new PropertyValueFactory<>("idVenda"));
         dataVenda.setCellValueFactory(new PropertyValueFactory<>("data"));
         estadoVenda.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        idClienteVenda.setCellValueFactory(new PropertyValueFactory<>("cliente"));
-        idGestorVenda.setCellValueFactory(new PropertyValueFactory<>("gestorVenda"));
-        idTransportVenda.setCellValueFactory(new PropertyValueFactory<>("transporte"));
+        idClienteVenda.setCellValueFactory(cellData -> {
+            Venda venda = cellData.getValue();
+            return new SimpleObjectProperty<>(venda.getCliente().getIdCliente());
+        });
+
+        idGestorVenda.setCellValueFactory(cellData -> {
+            Venda venda = cellData.getValue();
+            return new SimpleObjectProperty<>(venda.getGestorVenda().getUtilizador().getIdUser());
+
+        });
+        idTransportVenda.setCellValueFactory(cellData -> {
+            Venda venda = cellData.getValue();
+            return new SimpleObjectProperty<>(venda.getTransporte().getIdTransporte());
+        });
     }
 
     private void fillLinhaVendaTable(){
@@ -338,8 +350,14 @@ public class AdminManageDataController implements Initializable {
         qtdLote.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         dtIniLote.setCellValueFactory(new PropertyValueFactory<>("dataInicio"));
         dtRecolhaLote.setCellValueFactory(new PropertyValueFactory<>("dataRecolha"));
-        idGestorLote.setCellValueFactory(new PropertyValueFactory<>("gestorProducao"));
-        idTipoCLote.setCellValueFactory(new PropertyValueFactory<>("tipoCereal"));
+        idGestorLote.setCellValueFactory(cellData -> {
+            Lote lote = cellData.getValue();
+            return new SimpleObjectProperty<>(lote.getGestorProducao().getUtilizador().getIdUser());
+        });
+        idTipoCLote.setCellValueFactory(cellData -> {
+            Lote lote = cellData.getValue();
+            return new SimpleObjectProperty<>(lote.getTipoCereal().getIdTipoCereal());
+        });
     }
 
     private void fillLoteCultivoTable(){

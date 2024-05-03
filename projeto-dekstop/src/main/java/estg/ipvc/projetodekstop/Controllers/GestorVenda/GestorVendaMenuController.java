@@ -1,4 +1,4 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.GestorVenda;
 
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import javafx.event.ActionEvent;
@@ -20,22 +20,22 @@ public class GestorVendaMenuController {
 
     @FXML
     void insertTransport(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorvendaaddtransporte.fxml", "Adicionar Transporte", event);
     }
 
     @FXML
     void listClients(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorvendalistclients.fxml", "Lista de Clientes", event);
     }
 
     @FXML
     void manageSales(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorvendamanagesales.fxml", "Gerir Vendas", event);
     }
 
     @FXML
     void manageTransport(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorvendamanagetransport.fxml", "Gerir Transportes", event);
     }
 
     @FXML
@@ -45,7 +45,7 @@ public class GestorVendaMenuController {
 
     @FXML
     void registerSale(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorvendaregistersale.fxml", "Registar Venda", event);
     }
 
 }

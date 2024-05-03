@@ -51,7 +51,6 @@ public class GestorVendaBLL {
     }
 
 
-    // IDK IF THIS MAKES SENSE
     public static void removeVenda(GestorVenda gv, Venda venda, Cliente cli) {
         EntityManager em = DBConnect.getEntityManager();
         em.getTransaction().begin();
@@ -64,12 +63,12 @@ public class GestorVendaBLL {
         em.getTransaction().commit();
     }
 
-    public static void registerLinhaVenda(int idVenda, int idLote, int quantidade) {
-        LinhaVenda lv = new LinhaVenda();
-        lv.setIdLote(idLote);
-        lv.setIdVenda(idVenda);
-        lv.setQuantidade(quantidade);
-
+    public static void registerLinhaVenda(Venda venda, Lote lote, LinhaVenda lv) {
+        venda.getLinhaVendas().add(lv);
+        lote.getLinhaVendas().add(lv);
+        lote.setQuantidade(lote.getQuantidade() - lv.getQuantidade());
+        lv.setIdLote(lote.getIdLote());
+        lv.setIdVenda(venda.getIdVenda());
         EntityManager em = DBConnect.getEntityManager();
         em.getTransaction().begin();
         em.persist(lv);

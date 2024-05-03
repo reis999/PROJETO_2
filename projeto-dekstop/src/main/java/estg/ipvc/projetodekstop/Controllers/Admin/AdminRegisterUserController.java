@@ -1,4 +1,4 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.Admin;
 
 import estg.ipvc.projeto.data.BLL.DBConnect;
 import estg.ipvc.projeto.data.Entity.*;

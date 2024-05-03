@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="743.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.AdminRegisterUserController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="743.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.Admin.AdminRegisterUserController">
    <Text fill="WHITE" layoutX="14.0" layoutY="40.0" onMouseClicked="#back" strokeType="OUTSIDE" strokeWidth="0.0" text="Voltar" underline="true">
       <font>
          <Font size="24.0" />

@@ -12,10 +12,10 @@ public class Cliente{
     @Column(name = "id_cliente", nullable = false)
     private int idCliente;
     @Basic
-    @Column(name = "nome_empresa", nullable = false, length = 100)
+    @Column(name = "nome_empresa", length = 100)
     private String nomeEmpresa;
     @Basic
-    @Column(name = "nif", nullable = false, precision = 0)
+    @Column(name = "nif", precision = 0)
     private int nif;
     @OneToMany(mappedBy = "cliente")
     private Collection<Venda> vendas;

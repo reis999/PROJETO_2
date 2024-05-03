@@ -9,4 +9,10 @@ module estg.ipvc.projetodekstop {
     exports estg.ipvc.projetodekstop;
     exports estg.ipvc.projetodekstop.Controllers;
     opens estg.ipvc.projetodekstop.Controllers to javafx.fxml;
+    exports estg.ipvc.projetodekstop.Controllers.Admin;
+    opens estg.ipvc.projetodekstop.Controllers.Admin to javafx.fxml;
+    exports estg.ipvc.projetodekstop.Controllers.GestorVenda;
+    opens estg.ipvc.projetodekstop.Controllers.GestorVenda to javafx.fxml;
+    exports estg.ipvc.projetodekstop.Controllers.GestorProd;
+    opens estg.ipvc.projetodekstop.Controllers.GestorProd to javafx.fxml;
 }

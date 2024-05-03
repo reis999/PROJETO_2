@@ -4,7 +4,6 @@ import estg.ipvc.projeto.data.BLL.AdminBLL;
 import estg.ipvc.projeto.data.BLL.GestorProdBLL;
 import estg.ipvc.projeto.data.BLL.GestorVendaBLL;
 import estg.ipvc.projeto.data.Entity.Codpostal;
-import estg.ipvc.projeto.data.Entity.GestorVenda;
 import estg.ipvc.projeto.data.Entity.Utilizador;
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import javafx.event.ActionEvent;
@@ -62,14 +61,14 @@ public class ProfileController implements Initializable {
         if(LoginController.gestorVenda != null){
             LoadFXML.getInstance().loadResource("gestorvendamenu.fxml", "Menu Gestor de Venda", event);
         } else if(LoginController.gestorProducao != null){
-            LoadFXML.getInstance().loadResource("gestorproducaomenu.fxml", "Menu Gestor de Produção", event);
+            LoadFXML.getInstance().loadResource("gestorprodmenu.fxml", "Menu Gestor de Produção", event);
         } else if(LoginController.admin != null){
             LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
         }
     }
 
     @FXML
-    void editData(ActionEvent event) {
+    void editData() {
         fieldsEditable(true);
         editBtn.setVisible(false);
         removeBtn.setVisible(false);
@@ -162,7 +161,7 @@ public class ProfileController implements Initializable {
         alert.showAndWait();
     }
 
-    public void cancelChanges(ActionEvent actionEvent) {
+    public void cancelChanges() {
         fieldsEditable(false);
         editBtn.setVisible(true);
         removeBtn.setVisible(true);
@@ -171,7 +170,7 @@ public class ProfileController implements Initializable {
         fillFields();
     }
 
-    public void confirmChanges(ActionEvent actionEvent) {
+    public void confirmChanges() {
 
         boolean success = false;
 

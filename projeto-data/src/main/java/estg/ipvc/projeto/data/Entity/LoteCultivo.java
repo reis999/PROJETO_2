@@ -3,6 +3,7 @@ package estg.ipvc.projeto.data.Entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "lote_cultivo", schema = "public", catalog = "projeto1")
@@ -17,8 +18,8 @@ public class LoteCultivo {
     @Column(name = "id_cultivo", nullable = false)
     private int idCultivo;
     @Basic
-    @Column(name = "quantidade", nullable = true, precision = 2)
-    private BigDecimal quantidade;
+    @Column(name = "quantidade", precision = 2)
+    private int quantidade;
     @ManyToOne
     @JoinColumn(name = "id_lote", referencedColumnName = "id_lote", nullable = false, insertable = false, updatable = false)
     private Lote loteByIdLote;
@@ -42,11 +43,11 @@ public class LoteCultivo {
         this.idCultivo = idCultivo;
     }
 
-    public BigDecimal getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(BigDecimal quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -59,17 +60,12 @@ public class LoteCultivo {
 
         if (idLote != that.idLote) return false;
         if (idCultivo != that.idCultivo) return false;
-        if (quantidade != null ? !quantidade.equals(that.quantidade) : that.quantidade != null) return false;
-
-        return true;
+        return Objects.equals(quantidade, that.quantidade);
     }
 
     @Override
     public int hashCode() {
-        int result = idLote;
-        result = 31 * result + idCultivo;
-        result = 31 * result + (quantidade != null ? quantidade.hashCode() : 0);
-        return result;
+        return Objects.hash(idLote, idCultivo, quantidade, loteByIdLote, cultivoByIdCultivo);
     }
 
     public Lote getLoteByIdLote() {

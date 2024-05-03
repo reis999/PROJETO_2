@@ -12,7 +12,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0"
       prefWidth="1010.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.RegisterAdminController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.Admin.RegisterAdminController">
    <Text fill="WHITE" layoutX="404.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registar Admin"
          textAlignment="CENTER">
       <font>

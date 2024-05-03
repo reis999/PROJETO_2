@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.GestorVendaMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #4b3832;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estg.ipvc.projetodekstop.Controllers.GestorVenda.GestorVendaMenuController">
    <VBox layoutX="404.0" prefHeight="400.0" prefWidth="196.0" style="-fx-background-color: be9b7b;">
       <Pane>
          <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#listClients" prefHeight="68.0" prefWidth="196.0" style="-fx-background-color: be9b7b; -fx-border-color: fff4e6; -fx-border-width: 3;" text="Listar Clientes">

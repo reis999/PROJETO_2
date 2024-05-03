@@ -1,19 +1,23 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.Admin;
 
-import estg.ipvc.projeto.data.BLL.ClientBLL;
+import estg.ipvc.projeto.data.BLL.AdminBLL;
 import estg.ipvc.projeto.data.BLL.DBConnect;
 import estg.ipvc.projeto.data.Entity.*;
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import jakarta.persistence.EntityManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class AdminRegisterClientController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class RegisterAdminController implements Initializable {
 
     @FXML
     private TextField codpostal;
@@ -47,11 +51,12 @@ public class AdminRegisterClientController {
 
     @FXML
     void back(MouseEvent event) {
-        LoadFXML.getInstance().loadResource("adminregisteruser.fxml", "Registar Utilizador", event);
+        LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
     }
 
     @FXML
     void createAcc(ActionEvent event) {
+
         EntityManager em = DBConnect.getEntityManager();
 
         if(!verifyPass()){
@@ -61,8 +66,13 @@ public class AdminRegisterClientController {
         if(username.getText().isEmpty() ||
                 pass.getText().isEmpty() ||
                 pass2.getText().isEmpty() ||
-                nome.getText().isEmpty()){
-            alert("Preencha todos os campos obrigatórios.");
+                nome.getText().isEmpty() ||
+                email.getText().isEmpty() ||
+                telefone.getText().isEmpty() ||
+                rua.getText().isEmpty() ||
+                nporta.getText().isEmpty() ||
+                codpostal.getText().isEmpty()){
+            alert("Preencha todos os campos.");
             return;
         }
 
@@ -82,20 +92,25 @@ public class AdminRegisterClientController {
 
         Utilizador u = new Utilizador();
         setUserData(u);
-        Cliente cli = new Cliente();
+        Admin admin = new Admin();
+
         try {
-            ClientBLL.create(cli, u);
-        } catch (Exception e){
+            AdminBLL.create(admin, u);
+        } catch (Exception e) {
             alert("Erro ao criar conta");
             em.close();
-            LoadFXML.getInstance().loadResource("adminregisteruser.fxml", "Registar Utilizador", event);
+            LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
             return;
         }
 
+
         em.close();
-        LoadFXML.getInstance().loadResource("adminregisteruser.fxml", "Registar Utilizador", event);
+        LoadFXML.getInstance().loadResource("adminmenu.fxml", "Menu Admin", event);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 
     public boolean verifyPass(){
         matchPassTxt.setVisible(true);
@@ -122,13 +137,11 @@ public class AdminRegisterClientController {
         u.setCodpostal(cp);
         u.setEmail(email.getText());
         u.setRua(rua.getText());
-        if(nporta.getText().isEmpty()){
-            nporta.setText("0");
-        }
         u.setNumporta(Integer.parseInt(nporta.getText()));
         u.setNome(nome.getText());
         u.setPassword(pass.getText());
         u.setTelefone(telefone.getText());
         u.setUsername(username.getText());
     }
+
 }

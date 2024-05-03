@@ -1,4 +1,4 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.Admin;
 
 import estg.ipvc.projeto.data.BLL.DBConnect;
 import estg.ipvc.projeto.data.Entity.*;
@@ -41,10 +41,11 @@ public class AdminStatsController implements Initializable {
         int clients = 0;
         BigDecimal lote = new BigDecimal(0);
         AtomicReference<Double> sales = new AtomicReference<>((double) 0);
-        double transport = 0;
+        BigDecimal transport = BigDecimal.ZERO;
+
         List<Lote> lotes = em.createQuery("SELECT l FROM Lote l", Lote.class).getResultList();
         for(Lote l : lotes){
-            lote = lote.add(l.getPrecoUnidade());
+            lote = lote.add(l.getPrecoUnidade().multiply(new BigDecimal(l.getQuantidade())));
         }
         loteLabel.setText(lote.toString());
 
@@ -69,7 +70,7 @@ public class AdminStatsController implements Initializable {
         salesLabel.setText(String.valueOf(sales.get()));
 
         for(Venda v : vendas){
-            transport += v.getTransporte().getCusto().doubleValue();
+            transport = transport.add(v.getTransporte().getCusto());
         }
 
         transportLabel.setText(String.valueOf(transport));

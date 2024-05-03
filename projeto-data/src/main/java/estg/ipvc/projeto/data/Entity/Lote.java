@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -35,6 +36,11 @@ public class Lote {
     private TipoCereal tipoCereal;
     @OneToMany(mappedBy = "loteByIdLote")
     private Collection<LoteCultivo> loteCultivos;
+
+    public Lote() {
+        linhaVendas = new ArrayList<>();
+        loteCultivos = new ArrayList<>();
+    }
 
     public int getIdLote() {
         return idLote;

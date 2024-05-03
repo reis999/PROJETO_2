@@ -1,4 +1,4 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.Admin;
 
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import javafx.event.ActionEvent;

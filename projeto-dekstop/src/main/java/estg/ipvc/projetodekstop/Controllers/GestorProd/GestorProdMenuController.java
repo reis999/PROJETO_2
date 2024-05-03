@@ -1,4 +1,4 @@
-package estg.ipvc.projetodekstop.Controllers;
+package estg.ipvc.projetodekstop.Controllers.GestorProd;
 
 import estg.ipvc.projetodekstop.OtherClasses.LoadFXML;
 import javafx.event.ActionEvent;
@@ -10,7 +10,7 @@ public class GestorProdMenuController {
 
     @FXML
     void ManageCerealType(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorprodmanagecerealtype.fxml", "Gerir Tipos de Cereais", event);
     }
 
     @FXML
@@ -25,17 +25,17 @@ public class GestorProdMenuController {
 
     @FXML
     void listBatches(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorprodlistbatches.fxml", "Lista de Lotes", event);
     }
 
     @FXML
     void manageBatches(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorprodmanagebatches.fxml", "Gerir Lotes", event);
     }
 
     @FXML
     void manageCultivation(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorprodmanagecultivation.fxml", "Gerir Cultivo", event);
     }
 
     @FXML
@@ -45,7 +45,7 @@ public class GestorProdMenuController {
 
     @FXML
     void registerBatch(ActionEvent event) {
-
+        LoadFXML.getInstance().loadResource("gestorprodregisterbatch.fxml", "Registar Lote", event);
     }
 
 }

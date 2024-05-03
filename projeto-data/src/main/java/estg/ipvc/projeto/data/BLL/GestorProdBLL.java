@@ -4,6 +4,7 @@ import estg.ipvc.projeto.data.Entity.*;
 import jakarta.persistence.EntityManager;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 
 public class GestorProdBLL {
@@ -59,6 +60,10 @@ public class GestorProdBLL {
         EntityManager em = DBConnect.getEntityManager();
         em.getTransaction().begin();
         gp.getLotes().remove(lote);
+        Collection<LoteCultivo> loteCultivos = lote.getLoteCultivos();
+        for (LoteCultivo lc : loteCultivos) {
+            em.remove(lc);
+        }
         em.remove(lote);
         em.getTransaction().commit();
     }
@@ -105,15 +110,26 @@ public class GestorProdBLL {
         em.getTransaction().commit();
     }
 
-    public static void registerLoteCultivo(int idLote, int idCultivo, BigDecimal quantidade) {
-        LoteCultivo lc = new LoteCultivo();
-        lc.setIdCultivo(idCultivo);
-        lc.setIdLote(idLote);
-        lc.setQuantidade(quantidade);
-        EntityManager em = DBConnect.getEntityManager();
-        em.getTransaction().begin();
-        em.persist(lc);
-        em.getTransaction().commit();
+    public static void registerLoteCultivo(Lote lote, Cultivo cultivo, LoteCultivo lc) {
+        try {
+            EntityManager em = DBConnect.getEntityManager();
+
+            lote.getLoteCultivos().add(lc);
+            cultivo.getLoteCultivo().add(lc);
+
+            lc.setQuantidade(lote.getQuantidade());
+            lc.setIdLote(lote.getIdLote());
+            lc.setIdCultivo(cultivo.getIdCultivo());
+            lc.setLoteByIdLote(lote);
+            lc.setCultivoByIdCultivo(cultivo);
+
+            em.getTransaction().begin();
+            em.persist(lc);
+            em.getTransaction().commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
 }

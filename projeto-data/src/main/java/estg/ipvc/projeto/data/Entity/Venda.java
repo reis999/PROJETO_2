@@ -3,6 +3,7 @@ package estg.ipvc.projeto.data.Entity;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -29,6 +30,10 @@ public class Venda {
     @ManyToOne
     @JoinColumn(name = "id_transporte")
     private Transporte transporte;
+
+    public Venda() {
+        linhaVendas = new ArrayList<>();
+    }
 
     public int getIdVenda() {
         return idVenda;
