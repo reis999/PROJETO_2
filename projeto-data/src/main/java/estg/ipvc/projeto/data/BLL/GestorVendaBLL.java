@@ -33,6 +33,11 @@ public class GestorVendaBLL {
         em.getTransaction().commit();
     }
 
+    public static GestorVenda getGestorVenda(int id) {
+        EntityManager em = DBConnect.getEntityManager();
+        return em.find(GestorVenda.class, id);
+    }
+
     public static void addVenda(GestorVenda gv, Venda venda, Cliente cli) {
         EntityManager em = DBConnect.getEntityManager();
         em.getTransaction().begin();

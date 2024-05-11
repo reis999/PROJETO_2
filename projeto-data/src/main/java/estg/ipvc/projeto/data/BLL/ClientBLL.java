@@ -35,6 +35,11 @@ public class ClientBLL {
         em.getTransaction().commit();
     }
 
+    public static Cliente getCliente(int id) {
+        EntityManager em = DBConnect.getEntityManager();
+        return em.find(Cliente.class, id);
+    }
+
     public static List<Cliente> listarClientes() {
         return DBConnect.getEntityManager().createQuery("from Cliente").getResultList();
     }

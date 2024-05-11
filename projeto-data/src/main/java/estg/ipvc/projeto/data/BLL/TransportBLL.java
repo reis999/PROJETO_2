@@ -26,4 +26,8 @@ public class TransportBLL {
         em.getTransaction().commit();
     }
 
+    public static Transporte getTransporte(int id) {
+        EntityManager em = DBConnect.getEntityManager();
+        return em.find(Transporte.class, id);
+    }
 }

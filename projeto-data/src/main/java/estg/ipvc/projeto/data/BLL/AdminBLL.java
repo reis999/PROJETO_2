@@ -31,7 +31,10 @@ public class AdminBLL {
     }
 
 
-
+    public static Admin getAdmin(int id){
+        EntityManager em = DBConnect.getEntityManager();
+        return em.find(Admin.class, id);
+    }
 
 
 
