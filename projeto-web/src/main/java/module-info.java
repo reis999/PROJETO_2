@@ -7,12 +7,13 @@ module projeto.web {
     requires spring.context;
     requires spring.web;
     requires spring.core;
+    requires org.apache.tomcat.embed.core;
+    requires spring.boot.actuator;
+    requires spring.tx;
 
-    exports estg.ipvc.projetoweb;
-    exports estg.ipvc.projetoweb.Controllers to spring.beans, spring.context, spring.web;
-    exports estg.ipvc.projetoweb.Services.impl to spring.beans;
-
-    opens estg.ipvc.projetoweb to spring.core, spring.beans, spring.context, spring.web;
+    exports estg.ipvc.projetoweb.App;
+    opens estg.ipvc.projetoweb.App;
 }
+
 
 

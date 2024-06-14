@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Cliente</title>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Registro de Cliente</h2>
+    <form th:action="@{/register}" th:object="${cliente}" method="post">
+        <!-- User Fields -->
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" th:field="*{utilizador.nome}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{utilizador.email}" required>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" th:field="*{utilizador.username}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" th:field="*{utilizador.password}" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Telemovel</label>
+            <input type="text" id="phone" th:field="*{utilizador.telefone}" required>
+        </div>
+        <div class="form-group">
+            <label for="street">Rua</label>
+            <input type="text" id="street" th:field="*{utilizador.rua}" required>
+        </div>
+        <div class="form-group">
+            <label for="doorNumber">Nº Porta</label>
+            <input type="text" id="doorNumber" th:field="*{utilizador.numporta}" required>
+        </div>
+        <div class="form-group">
+            <label for="postalCode">Código Postal</label>
+            <input type="text" id="postalCode" th:field="*{utilizador.codpostal.codpostal}" required>
+        </div>
+
+        <!-- Client Fields -->
+        <div class="form-group">
+            <label for="nif">NIF</label>
+            <input type="text" id="nif" th:field="*{nif}" required>
+        </div>
+        <div class="form-group">
+            <label for="companyName">Nome Empresa</label>
+            <input type="text" id="companyName" th:field="*{nomeEmpresa}" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Registrar</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

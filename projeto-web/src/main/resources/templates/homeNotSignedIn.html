@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <style>
+        body {
+            display: flex;
+        }
+
+        .sidemenu {
+            width: 250px;
+            background-color: #4b3832;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        .sidemenu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidemenu a:hover {
+            background-color: #be9b7b;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .hero-unit {
+            background-color: #eee;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #be9b7b;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        .btn:hover {background-color: #a08469
+        }
+
+        .btn:active {
+            background-color: #a08469;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+        .navbar-brand{
+            font-size: 30px;
+            text-align: center;
+            color: #f2f2f2;
+            display: block;
+            border-width: 3px;
+            border-color: #be9b7b;
+            border-style: solid;
+            border-top-width: 0;
+            border-right-width: 0;
+            border-left-width: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="sidemenu">
+    <h2 class="navbar-brand">Produtora de Cereais</h2>
+    <a href="/" th:href="@{/}">Home</a>
+    <a href="/login" th:href="@{/login}">Login</a>
+    <a href="/register" th:href="@{/register}">Registar</a>
+</div>
+<div class="main-content">
+    <div class="hero-unit">
+        <h1>Bem Vindo</h1>
+        <p>
+            Bem vindo ao website da Produtora de Cereais. Para aceder a mais funcionalidades, por favor registe-se.
+        </p>
+        <p>
+            <a href="/register" th:href="@{/register}" class="btn btn-large btn-success">Registar</a>
+        </p>
+    </div>
+    <div th:replace="~{fragments/footer :: footer}">&copy; Trabalho realizado no âmbito de unidade curricular de Projeto 2</div>
+</div>
+</body>
+</html>

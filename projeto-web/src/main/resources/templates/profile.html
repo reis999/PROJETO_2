@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil do Cliente</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #fff4e6;
+        }
+
+        .sidemenu {
+            width: 250px;
+            background-color: #4b3832;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .sidemenu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidemenu a:hover {
+            background-color: #be9b7b;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .profile-container {
+            transform: translateX(15%);
+            background-color: #be9b7b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 75%;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-header h1 {
+            color: #0C090D;
+        }
+
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            color: #0C090D;
+        }
+
+        .form-group input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #282B28;
+            border-radius: 5px;
+        }
+
+        .form-group input[readonly] {
+            background-color: #DDD;
+            cursor: not-allowed;
+        }
+
+        .form-group button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #be9b7b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #a08469;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        .btn-edit {
+            display: block;
+        }
+
+        .btn-save, .btn-cancel {
+            display: none;
+        }
+
+        .editing .btn-edit {
+            display: none;
+        }
+
+        .editing .btn-save, .editing .btn-cancel {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="sidemenu">
+    <h2 style="text-align: center;">Menu</h2>
+    <a href="/homeSignedIn" th:href="@{/homeSignedIn}">Home</a>
+    <a href="/profile" th:href="@{/profile}">Perfil</a>
+    <a href="/orders" th:href="@{/orders}">Encomendas</a>
+    <a href="/logout" th:href="@{/logout}">Logout</a>
+</div>
+<div class="main-content">
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Perfil de Cliente</h1>
+        </div>
+        <form class="profile-form" th:action="@{/profile}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" th:field="*{utilizador.nome}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{utilizador.email}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" th:field="*{utilizador.username}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" id="password" th:field="*{utilizador.password}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telemovel</label>
+                <input type="text" id="phone" th:field="*{utilizador.telefone}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="street">Rua</label>
+                <input type="text" id="street" th:field="*{utilizador.rua}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="doorNumber">Nº Porta</label>
+                <input type="text" id="doorNumber" th:field="*{utilizador.numporta}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="postalCode">Código Postal</label>
+                <input type="text" id="postalCode" th:field="*{utilizador.codpostal.codpostal}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="nif">NIF</label>
+                <input type="text" id="nif" th:field="*{nif}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="companyName">Nome Empresa</label>
+                <input type="text" id="companyName" th:field="*{nomeEmpresa}" readonly>
+            </div>
+            <div class="form-buttons">
+                <button type="button" class="btn-edit" onclick="enableEditing()">Editar</button>
+                <button type="submit" class="btn-save">Salvar</button>
+                <button type="button" class="btn-cancel" onclick="disableEditing()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function enableEditing() {
+        const form = document.querySelector('.profile-form');
+        form.classList.add('editing');
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => input.removeAttribute('readonly'));
+    }
+
+    function disableEditing() {
+        const form = document.querySelector('.profile-form');
+        form.classList.remove('editing');
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => input.setAttribute('readonly', true));
+    }
+</script>
+</body>
+</html>
