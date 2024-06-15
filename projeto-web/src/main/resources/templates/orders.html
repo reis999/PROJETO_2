@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Encomendar Lotes</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #fff4e6;
+        }
+
+        .sidemenu {
+            width: 250px;
+            background-color: #4b3832;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .sidemenu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidemenu a:hover {
+            background-color: #be9b7b;
+        }
+
+        .sidemenu-options {
+            margin: 15px;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .orders-container {
+            transform: translate(15%, 20%);
+            background-color: #cbb19b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 75%;
+        }
+
+        .orders-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .orders-header h1 {
+            color: #0C090D;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .orders-table th, .orders-table td {
+            border: 1px solid #282B28;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .orders-table th {
+            background-color: #0C090D;
+            color: white;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            color: #0C090D;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #282B28;
+            border-radius: 5px;
+            background-color: #DDD;
+        }
+
+        .form-group button {
+            padding: 10px;
+            font-size: 16px;
+            color: black;
+            background-color: #be9b7b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #a08469;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .alert-success {
+            background-color: #4CAF50;
+        }
+
+        .alert-danger {
+            background-color: #F44336;
+        }
+
+        .price-label {
+            font-weight: bold;
+            color: #0C090D;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="sidemenu">
+    <h2 style="text-align: center;">Menu</h2>
+    <a class="sidemenu-options" href="/homeSignedIn" th:href="@{/homeSignedIn}">Home</a>
+    <a class="sidemenu-options" href="/orders" th:href="@{/orders}">Encomendar</a>
+    <a class="sidemenu-options" href="/history" th:href="@{/history}">Histórico de Encomendas</a>
+    <a class="sidemenu-options" href="/profile" th:href="@{/profile}">Perfil</a>
+    <a class="sidemenu-options" href="/logout" th:href="@{/logout}">Logout</a>
+</div>
+<div class="main-content">
+    <div class="orders-container">
+        <div class="orders-header">
+            <h1>Encomendar Lotes</h1>
+        </div>
+
+        <!-- Alert message -->
+        <div th:if="${message}" th:text="${message}"
+             th:classappend="${success} == 'true' ? 'alert alert-success' : 'alert alert-danger'"></div>
+
+        <table class="orders-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="lote : ${lotes}">
+                <td th:text="${lote.idLote}">1</td>
+                <td th:text="${lote.tipoCereal.nomeCereal}">Lote 1</td>
+                <td th:text="${lote.quantidade}">100</td>
+                <td th:text="${lote.precoUnidade}">10.00</td>
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/orders}" th:object="${venda}" method="post" onsubmit="return validarFormulario()">
+            <input type="hidden" th:field="*{idVenda}"/>
+            <div class="form-group">
+                <label for="lote">Selecionar Lote</label>
+                <select id="lote" name="loteId">
+                    <option th:each="lote : ${lotes}" th:value="${lote.idLote}"
+                            th:text="${lote.tipoCereal.nomeCereal} + ' (ID: ' + ${lote.idLote} + ')'"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade</label>
+                <input type="number" id="quantidade" name="quantidade" min="1" required oninput="calcularPrecoTotal()">
+            </div>
+            <div class="form-group">
+                <label for="transporte">Tipo de Transporte</label>
+                <select id="transporte" name="tipoTransporte">
+                    <option th:each="transporte : ${transportes}" th:value="${transporte.tipo}"
+                            th:text="${transporte.tipo}"></option>
+                </select>
+            </div>
+            <div class="price-label">
+                Preço Total: <span id="precoTotal">0.00</span>
+            </div>
+            <div class="form-group">
+                <button type="submit">Fazer Encomenda</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const lotes = /*[[${lotes}]]*/ [];
+
+    function calcularPrecoTotal() {
+        const loteId = document.getElementById('lote').value;
+        const quantidade = document.getElementById('quantidade').value;
+        const lote = lotes.find(l => l.idLote == loteId);
+
+        if (lote && quantidade > 0) {
+            const precoTotal = lote.precoUnidade * quantidade;
+            document.getElementById('precoTotal').innerText = precoTotal.toFixed(2);
+        } else {
+            document.getElementById('precoTotal').innerText = '0.00';
+        }
+    }
+
+    function validarFormulario() {
+        const quantidade = document.getElementById('quantidade').value;
+        if (quantidade <= 0) {
+            alert("A quantidade deve ser maior que zero.");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
+

@@ -44,8 +44,7 @@ public class ProfileController {
 
 
         if (cli == null) {
-            // Pode retornar uma página de erro ou redirecionar para uma página de perfil vazia
-            return "redirect:/profile"; // Redireciona para a página de perfil
+            return "redirect:/profile";
         }
 
         Utilizador user = cli.getUtilizador();

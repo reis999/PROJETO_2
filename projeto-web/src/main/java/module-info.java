@@ -10,6 +10,7 @@ module projeto.web {
     requires org.apache.tomcat.embed.core;
     requires spring.boot.actuator;
     requires spring.tx;
+    requires static lombok;
 
     exports estg.ipvc.projetoweb.App;
     opens estg.ipvc.projetoweb.App;

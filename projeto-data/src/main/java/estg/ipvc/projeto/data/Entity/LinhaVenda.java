@@ -1,5 +1,6 @@
 package estg.ipvc.projeto.data.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class LinhaVenda {
     private int quantidade;
     @ManyToOne
     @JoinColumn(name = "id_venda", referencedColumnName = "id_venda", nullable = false, insertable = false, updatable = false)
+    @JsonBackReference
     private Venda vendaByIdVenda;
     @ManyToOne
     @JoinColumn(name = "id_lote", referencedColumnName = "id_lote", nullable = false, insertable = false, updatable = false)

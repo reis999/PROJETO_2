@@ -1,7 +1,9 @@
 package estg.ipvc.projeto.data.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +21,11 @@ public class Venda {
     @Basic
     @Column(name = "estado", nullable = false, length = 50)
     private String estado;
-    @OneToMany(mappedBy = "vendaByIdVenda")
+    @Basic
+    @Column(name = "valor", precision = 2)
+    private BigDecimal valor;
+    @OneToMany(mappedBy = "vendaByIdVenda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Collection<LinhaVenda> linhaVendas;
     @ManyToOne
     @JoinColumn(name = "id_cliente")
@@ -59,11 +65,18 @@ public class Venda {
         this.estado = estado;
     }
 
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Venda)) return false;
-        Venda venda = (Venda) o;
+        if (!(o instanceof Venda venda)) return false;
         return idVenda == venda.idVenda &&
                 Objects.equals(data, venda.data) &&
                 Objects.equals(estado, venda.estado) &&

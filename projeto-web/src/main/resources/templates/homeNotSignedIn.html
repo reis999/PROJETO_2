@@ -6,6 +6,9 @@
     <style>
         body {
             display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #fff4e6;
         }
 
         .sidemenu {
@@ -15,6 +18,7 @@
             position: fixed;
             height: 100%;
             overflow-x: hidden;
+            color: white;
         }
 
         .sidemenu a {
@@ -27,6 +31,10 @@
 
         .sidemenu a:hover {
             background-color: #be9b7b;
+        }
+
+        .sidemenu-options {
+            margin: 15px;
         }
 
         .main-content {
@@ -81,10 +89,10 @@
 </head>
 <body>
 <div class="sidemenu">
-    <h2 class="navbar-brand">Produtora de Cereais</h2>
-    <a href="/" th:href="@{/}">Home</a>
-    <a href="/login" th:href="@{/login}">Login</a>
-    <a href="/register" th:href="@{/register}">Registar</a>
+    <h2 class="sidemenu-options">Produtora de Cereais</h2>
+    <a class="sidemenu-options" href="/" th:href="@{/}">Home</a>
+    <a class="sidemenu-options" href="/login" th:href="@{/login}">Login</a>
+    <a class="sidemenu-options" href="/register" th:href="@{/register}">Registar</a>
 </div>
 <div class="main-content">
     <div class="hero-unit">

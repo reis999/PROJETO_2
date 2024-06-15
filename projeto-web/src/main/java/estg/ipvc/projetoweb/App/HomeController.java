@@ -1,6 +1,5 @@
 package estg.ipvc.projetoweb.App;
 
-import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

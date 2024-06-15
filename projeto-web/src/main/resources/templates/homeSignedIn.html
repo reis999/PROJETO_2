@@ -6,6 +6,9 @@
     <style>
         body {
             display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #fff4e6;
         }
 
         .sidemenu {
@@ -15,6 +18,7 @@
             position: fixed;
             height: 100%;
             overflow-x: hidden;
+            color: white;
         }
 
         .sidemenu a {
@@ -41,32 +45,14 @@
             border-radius: 10px;
         }
 
-        .navbar-brand {
-            font-size: 24px;
-            color: #f2f2f2;
-            padding: 10px;
-            display: block;
-        }
-
-        .navbar-brand{
-            font-size: 30px;
-            text-align: center;
-            color: #f2f2f2;
-            display: block;
-            border-width: 3px;
-            border-color: #be9b7b;
-            border-style: solid;
-            border-top-width: 0;
-            border-right-width: 0;
-            border-left-width: 0;
-        }
     </style>
 </head>
 <body>
 <div class="sidemenu">
-    <h2 class="navbar-brand">Menu</h2>
+    <h2 style="text-align: center;">Menu</h2>
     <a href="/homeSignedIn" th:href="@{/homeSignedIn}">Home</a>
-    <a href="/orders" th:href="@{/orders}">Encomendas</a>
+    <a href="/orders" th:href="@{/orders}">Encomendar</a>
+    <a href="/history" th:href="@{/history}">Histórico de Encomendas</a>
     <a href="/profile" th:href="@{/profile}">Perfil</a>
     <a href="/logout" th:href="@{/logout}">Logout</a>
 </div>
