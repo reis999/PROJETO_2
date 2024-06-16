@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico de Encomendas</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #fff4e6;
+        }
+
+        .sidemenu {
+            width: 250px;
+            background-color: #4b3832;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .sidemenu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+
+        .sidemenu a:hover {
+            background-color: #be9b7b;
+        }
+
+        .sidemenu-options {
+            margin: 15px;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .history-container {
+            transform: translate(15%, 20%);
+            background-color: #cbb19b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 75%;
+        }
+
+        .history-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .history-header h1 {
+            color: #0C090D;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .history-table th, .history-table td {
+            border: 1px solid #282B28;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .history-table th {
+            background-color: #0C090D;
+            color: white;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            color: #0C090D;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #282B28;
+            border-radius: 5px;
+            background-color: #DDD;
+        }
+
+        .form-group button {
+            padding: 10px;
+            font-size: 16px;
+            color: black;
+            background-color: #be9b7b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #a08469;
+        }
+
+        .total-encomendas {
+            font-weight: bold;
+            color: #0C090D;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="sidemenu">
+    <h2 style="text-align: center;">Menu</h2>
+    <a class="sidemenu-options" href="/homeSignedIn" th:href="@{/homeSignedIn}">Home</a>
+    <a class="sidemenu-options" href="/orders" th:href="@{/orders}">Encomendar</a>
+    <a class="sidemenu-options" href="/history" th:href="@{/history}">Histórico de Encomendas</a>
+    <a class="sidemenu-options" href="/profile" th:href="@{/profile}">Perfil</a>
+    <a class="sidemenu-options" href="/logout" th:href="@{/logout}">Logout</a>
+</div>
+<div class="main-content">
+    <div class="history-container">
+        <div class="history-header">
+            <h1>Histórico de Encomendas</h1>
+        </div>
+        <table id="tabelaEncomendas" class="history-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data</th>
+                <th>Estado</th>
+                <th>Preço Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="venda : ${vendas}">
+                <td th:text="${venda.idVenda}">1</td>
+                <td th:text="${venda.data}">2024-06-15</td>
+                <td th:text="${venda.estado}">PENDENTE</td>
+                <td th:text="${venda.valor}">100.00</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="filter-options">
+            <label for="estado">Filtrar por Estado:</label>
+            <select id="estado" onchange="filtrarTabela()">
+                <option value="">Todos</option>
+                <option value="PENDENTE">Pendente</option>
+                <option value="ENTREGUE">Entregue</option>
+                <option value="A CAMINHO">A Caminho</option>
+                <option value="CANCELADA">Cancelada</option>
+            </select>
+            <label for="ordem">Ordenar por Preço:</label>
+            <select id="ordem" onchange="ordenarTabela()">
+                <option value="asc">Ascendente</option>
+                <option value="desc">Descendente</option>
+            </select>
+        </div>
+        <div class="total-encomendas">
+            Total Encomendas: <span id="totalEnc">0.00</span>
+        </div>
+    </div>
+
+    <div id="vendasData" style="display: none;" th:text="${vendas}"></div>
+</div>
+
+<script>
+    let vendas;
+    let tabelaEncomendas;
+    let totalEnc = document.getElementById('totalEnc');
+    let filtroEstado = "";
+    let ordemPreco = "asc";
+
+    function calcularTotalEncomendas(vendasFiltradas) {
+        // Soma o valor de todas as vendas filtradas
+        const total = vendasFiltradas.reduce((sum, venda) => sum + parseFloat(venda.valor) + 2, 0);
+        totalEnc.innerText = total.toFixed(2);
+    }
+
+    function filtrarTabela() {
+        const filtroEstado = document.getElementById('estado').value;
+        atualizarTabela(filtroEstado);
+    }
+
+    function ordenarTabela() {
+        const ordemPreco = document.getElementById('ordem').value;
+        atualizarTabela(null, ordemPreco);
+    }
+
+    function atualizarTabela(filtroEstado = null, ordemPreco = "asc") {
+        if (!tabelaEncomendas) {
+            console.error("Elemento tabelaEncomendas não encontrado");
+            return;
+        }
+
+        let vendasFiltradas = vendas;
+
+        if (filtroEstado) {
+            vendasFiltradas = vendasFiltradas.filter(venda => venda.estado === filtroEstado);
+        }
+
+        vendasFiltradas.sort((a, b) => {
+            const valorA = parseFloat(a.valor);
+            const valorB = parseFloat(b.valor);
+            return ordemPreco === "asc" ? valorA - valorB : valorB - valorA;
+        });
+
+        // Limpar a tabela antes de atualizar
+        while (tabelaEncomendas.firstChild) {
+            tabelaEncomendas.removeChild(tabelaEncomendas.firstChild);
+        }
+
+        vendasFiltradas.forEach(venda => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+            <td>${venda.idVenda}</td>
+            <td>${venda.data}</td>
+            <td>${venda.estado}</td>
+            <td>${venda.valor.toFixed(2)}</td>
+        `;
+            tabelaEncomendas.appendChild(row);
+        });
+
+        calcularTotalEncomendas(vendasFiltradas);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let vendasDataElement = document.getElementById('vendasData');
+        vendas = vendasDataElement ? JSON.parse(vendasDataElement.textContent) : [];
+        tabelaEncomendas = document.getElementById('tabelaEncomendas').getElementsByTagName('tbody')[0];
+
+        // Adicione os eventos onchange aqui
+        document.getElementById('estado').onchange = filtrarTabela;
+        document.getElementById('ordem').onchange = ordenarTabela;
+
+        atualizarTabela();
+    });
+
+</script>
+</body>
+</html>

@@ -9,8 +9,7 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError() {
-        // Lógica personalizada pode ser adicionada aqui
-        return "error"; // Nome do template (error.html) sem a extensão
+        return "error";
     }
 }
 

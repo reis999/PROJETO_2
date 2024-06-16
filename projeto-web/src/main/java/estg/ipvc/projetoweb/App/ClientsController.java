@@ -28,7 +28,7 @@ public class ClientsController {
 
     @GetMapping("/test")
     public String testEndpoint() {
-        return "test"; // Esta view deve existir no diretório templates
+        return "test";
     }
 }
 

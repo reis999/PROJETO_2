@@ -174,7 +174,7 @@
             <input type="hidden" th:field="*{idVenda}"/>
             <div class="form-group">
                 <label for="lote">Selecionar Lote</label>
-                <select id="lote" name="loteId">
+                <select id="lote" name="loteId" onchange="atualizarQuantidadeMaxima()">
                     <option th:each="lote : ${lotes}" th:value="${lote.idLote}"
                             th:text="${lote.tipoCereal.nomeCereal} + ' (ID: ' + ${lote.idLote} + ')'"></option>
                 </select>
@@ -203,6 +203,18 @@
 <script>
     const lotes = /*[[${lotes}]]*/ [];
 
+    function atualizarQuantidadeMaxima() {
+        const loteId = document.getElementById('lote').value;
+        const lote = lotes.find(l => l.idLote == loteId);
+
+        if (lote) {
+            const quantidadeInput = document.getElementById('quantidade');
+            quantidadeInput.max = lote.quantidade;
+        }
+
+        calcularPrecoTotal();
+    }
+
     function calcularPrecoTotal() {
         const loteId = document.getElementById('lote').value;
         const quantidade = document.getElementById('quantidade').value;
@@ -224,6 +236,8 @@
         }
         return true;
     }
+
+    window.onload = atualizarQuantidadeMaxima;
 </script>
 </body>
 </html>

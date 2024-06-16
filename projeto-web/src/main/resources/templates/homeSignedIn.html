@@ -33,6 +33,10 @@
             background-color: #be9b7b;
         }
 
+        .sidemenu-options {
+            margin: 15px;
+        }
+
         .main-content {
             margin-left: 260px;
             padding: 20px;
@@ -50,11 +54,11 @@
 <body>
 <div class="sidemenu">
     <h2 style="text-align: center;">Menu</h2>
-    <a href="/homeSignedIn" th:href="@{/homeSignedIn}">Home</a>
-    <a href="/orders" th:href="@{/orders}">Encomendar</a>
-    <a href="/history" th:href="@{/history}">Histórico de Encomendas</a>
-    <a href="/profile" th:href="@{/profile}">Perfil</a>
-    <a href="/logout" th:href="@{/logout}">Logout</a>
+    <a class="sidemenu-options" href="/homeSignedIn" th:href="@{/homeSignedIn}">Home</a>
+    <a class="sidemenu-options" href="/orders" th:href="@{/orders}">Encomendar</a>
+    <a class="sidemenu-options" href="/history" th:href="@{/history}">Histórico de Encomendas</a>
+    <a class="sidemenu-options" href="/profile" th:href="@{/profile}">Perfil</a>
+    <a class="sidemenu-options" href="/logout" th:href="@{/logout}">Logout</a>
 </div>
 <div class="main-content">
     <div class="hero-unit">
@@ -63,7 +67,6 @@
             Esta é a sua área de cliente onde pode gerir as suas encomendas e outras atividades.
         </p>
     </div>
-    <div th:replace="~{fragments/footer :: footer}">&copy; Trabalho realizado no âmbito de unidade curricular de Projeto 2</div>
 </div>
 </body>
 </html>

@@ -89,7 +89,7 @@ public class OrderController {
                 return "redirect:/orders?message=Encomenda realizada com sucesso!&success=true";
 
             } else {
-                return "redirect:/orders?message=Quantidade inválida!&success=false";
+                return "redirect:/orders?message=Quantidade invalida!&success=false";
             }
         } catch (Exception e) {
             return "redirect:/orders?message=Ocorreu um erro ao processar a encomenda!&success=false";
